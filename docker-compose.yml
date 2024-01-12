@@ -1,0 +1,63 @@
+version: "3.7"
+
+services:
+  app:
+    build:
+      args:
+        user: ${USER}
+        uid: 1000
+      context: ./
+      dockerfile: ./docker/app/Dockerfile
+    image: produtos-api
+    container_name: produtos-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+      - ./docker/app/php.ini:/usr/local/etc/php/php.ini
+    environment:
+      - TZ=America/Santarem
+    networks:
+      contracts:
+        ipv4_address: 172.16.10.4
+  db:
+    image: mysql
+    expose:
+      - 3306
+    container_name: produtos-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      contracts:
+        ipv4_address: 172.16.10.2
+
+  nginx:
+    image: nginx:alpine
+    container_name: produtos-nginx
+    restart: unless-stopped
+    expose:
+      - 80
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx:/etc/nginx/conf.d/
+    environment:
+      - TZ=America/Santarem
+    networks:
+      contracts:
+        ipv4_address: 172.16.10.3
+
+volumes:
+  mysql_data:
+
+networks:
+  contracts:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.10.0/28
