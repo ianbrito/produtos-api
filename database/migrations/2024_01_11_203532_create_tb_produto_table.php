@@ -14,9 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tb_produto', function (Blueprint $table) {
-            $table->integer('id_produto')->primary();
+            $table->integer('id_produto')->autoIncrement();
             $table->integer('id_categoria_produto');
             $table->dateTime('data_cadastro');
+            $table->string('nome_produto', 150);
             $table->float('valor_produto', 10, 2);
             $table->foreign('id_categoria_produto')->on('tb_categoria_produto')->references('id_categoria_planejamento');
         });
