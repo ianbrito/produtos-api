@@ -15,7 +15,7 @@ class CategoriaProdutoResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'idCategoriaProduto' => $this->id_categoria_planejamento,
+            'idCategoriaProduto' => $this->id_categoria,
             'nomeCategoria' => $this->nome_categoria,
         ];
     }

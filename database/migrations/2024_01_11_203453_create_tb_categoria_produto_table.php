@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tb_categoria_produto', function (Blueprint $table) {
-            $table->integer('id_categoria_planejamento')->autoIncrement();
+            $table->integer('id_categoria')->autoIncrement();
             $table->string('nome_categoria', 150);
         });
     }

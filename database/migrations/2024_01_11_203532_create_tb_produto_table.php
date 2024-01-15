@@ -19,7 +19,7 @@ return new class extends Migration
             $table->dateTime('data_cadastro');
             $table->string('nome_produto', 150);
             $table->float('valor_produto', 10, 2);
-            $table->foreign('id_categoria_produto')->on('tb_categoria_produto')->references('id_categoria_planejamento');
+            $table->foreign('id_categoria_produto')->on('tb_categoria_produto')->references('id_categoria');
         });
     }
 
