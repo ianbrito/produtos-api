@@ -17,7 +17,7 @@ class CategoriaProdutoController extends Controller
 {
     public function index()
     {
-        $categorias = CategoriaProduto::query()->orderBy('nome_categoria')->get();
+        $categorias = CategoriaProduto::query()->orderBy('id_categoria')->get();
         return new CategoriaProdutoCollection($categorias);
     }
 

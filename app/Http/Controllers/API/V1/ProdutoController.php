@@ -17,7 +17,7 @@ class ProdutoController extends Controller
 {
     public function index()
     {
-        $produtos = Produto::all();
+        $produtos = Produto::query()->orderBy('id_produto')->get();
         return ProdutoCollection::make($produtos);
     }
 
