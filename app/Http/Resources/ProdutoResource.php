@@ -20,6 +20,7 @@ class ProdutoResource extends JsonResource
         return [
             'idProduto' => $this->id_produto,
             'nomeProduto' => $this->nome_produto,
+            'valorProduto' => $this->valor_produto,
             'categoriaProduto' => CategoriaProdutoResource::make($this->categoriaProduto),
         ];
     }
